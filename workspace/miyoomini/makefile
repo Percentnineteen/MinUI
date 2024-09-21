@@ -14,6 +14,7 @@ REQUIRES_SDL=other/sdl
 REQUIRES_COMMANDER=other/DinguxCommander
 
 all: 
+	cd ./overclock && make
 	cd blank && make
 	cd batmon && make
 	cd lumon && make

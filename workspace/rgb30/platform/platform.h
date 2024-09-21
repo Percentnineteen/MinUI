@@ -85,6 +85,8 @@
 #define JOY_R2			7
 #define JOY_L3			JOY_NA
 #define JOY_R3			JOY_NA
+#define JOY_AXIS_L2 JOY_NA
+#define JOY_AXIS_R2 JOY_NA
 
 #define JOY_MENU		11 // TODO: tmp? can I repurpose power?
 #define JOY_MENU_ALT	12 // TODO: tmp? can I repurpose power?

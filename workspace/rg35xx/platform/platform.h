@@ -66,26 +66,32 @@
 #define JOY_DOWN		JOY_NA
 #define JOY_LEFT		JOY_NA
 #define JOY_RIGHT		JOY_NA
+#define JOY_HAT_UP    0x01
+#define JOY_HAT_RIGHT 0x02
+#define JOY_HAT_DOWN  0x04
+#define JOY_HAT_LEFT  0x08
 
-#define JOY_SELECT		JOY_NA
-#define JOY_START		JOY_NA
+#define JOY_SELECT		8
+#define JOY_START		7
 
-#define JOY_A			JOY_NA
-#define JOY_B			JOY_NA
-#define JOY_X			JOY_NA
-#define JOY_Y			JOY_NA
+#define JOY_A			0
+#define JOY_B			1
+#define JOY_X			2
+#define JOY_Y			3
 
-#define JOY_L1			JOY_NA
-#define JOY_R1			JOY_NA
+#define JOY_L1			5
+#define JOY_R1			6
 #define JOY_L2			JOY_NA
 #define JOY_R2			JOY_NA
 #define JOY_L3			JOY_NA
 #define JOY_R3			JOY_NA
+#define JOY_AXIS_L2 2
+#define JOY_AXIS_R2 5
 
-#define JOY_MENU		JOY_NA
-#define JOY_POWER		JOY_NA
-#define JOY_PLUS		JOY_NA
-#define JOY_MINUS		JOY_NA
+#define JOY_MENU		9
+#define JOY_POWER		JOY_NA //don't want to double-bind
+#define JOY_PLUS		10
+#define JOY_MINUS		11
 
 ///////////////////////////////
 

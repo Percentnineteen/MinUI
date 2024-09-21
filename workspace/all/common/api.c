@@ -1137,10 +1137,34 @@ void PAD_poll(void) {
 			else if (joy==JOY_MINUS)	{ btn = BTN_MINUS; 		id = BTN_ID_MINUS; }
 			else if (joy==JOY_POWER)	{ btn = BTN_POWER; 		id = BTN_ID_POWER; }
 		}
+    else if (event.type==SDL_JOYHATMOTION) {
+			uint8_t joy = event.jhat.value;
+			 LOG_info("joy hat event: %i\n", joy);
+      pad.just_released = (pad.is_pressed ^ joy) & pad.is_pressed & 0xF;
+      pad.just_pressed = (pad.is_pressed ^ joy) & joy;
+      pad.just_repeated &= ~pad.just_released; // any pad that was just released should not have just repeated
+      pad.is_pressed &= ~0xF;
+      pad.is_pressed |= joy;
+
+      for (int i = 0; i < 3; i++) {
+        if ((pad.just_pressed >> i) & 1) {
+          pad.just_repeated |= 1 << i;// because the directions always query repeated???
+          pad.repeat_at[i] = tick + PAD_REPEAT_DELAY;
+        }
+      }
+    }
+    else if (event.type==SDL_JOYAXISMOTION) {
+			uint8_t joy = event.jaxis.axis;
+			int val = event.jaxis.value;
+			 LOG_info("joy axis event: %i %i\n", joy, val);
+      if      (joy==JOY_AXIS_L2) { btn = BTN_L2; id = BTN_ID_L2; }
+      else if (joy==JOY_AXIS_R2) { btn = BTN_R2; id = BTN_ID_R2; }
+    }
 		
 		if (btn==BTN_NONE) continue;
+    if (event.type == SDL_JOYHATMOTION) continue;
 		
-		if (event.type==SDL_KEYUP || event.type==SDL_JOYBUTTONUP) {
+		if (event.type==SDL_KEYUP || event.type==SDL_JOYBUTTONUP || (event.type==SDL_JOYAXISMOTION && event.jaxis.value < 0)) {
 			pad.is_pressed		&= ~btn; // unset
 			pad.just_repeated	&= ~btn; // unset
 			pad.just_released	|= btn; // set
